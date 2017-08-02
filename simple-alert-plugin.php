@@ -41,11 +41,11 @@ class SimpleAlertPlugin {
 
 		$post_id = get_the_ID();
 		$post_type = get_post_type();
-		
+		$selected_post  = $list_of_posts =array();
 		$selected_post = get_option('selected_post_type');
 		$list_of_posts = get_option('list_of_posts');
 						
-		if (!is_admin() && in_array($post_type,$selected_post) && in_array($post_id,$list_of_posts[$post_type] ) && !is_home()){ ?>	
+		if (!empty($selected_post) && !empty($list_of_posts) && !is_admin() && in_array($post_type,$selected_post) && in_array($post_id,$list_of_posts[$post_type] ) && !is_home()){ ?>	
 		
 		<div id="hidden" style="display:none;">
 			<?php echo get_option('alert_text');	?>
@@ -58,11 +58,11 @@ class SimpleAlertPlugin {
 	{
 		$post_id = get_the_ID();
 		$post_type = get_post_type();
-		
+		$selected_post  = $list_of_posts =array();
 		$selected_post = get_option('selected_post_type');
 		$list_of_posts = get_option('list_of_posts');
 			
-		if (!is_admin() && in_array($post_type,$selected_post) && in_array($post_id,$list_of_posts[$post_type] ) && !is_home())
+		if (!empty($selected_post) && !empty($list_of_posts) && !is_admin() && in_array($post_type,$selected_post) && in_array($post_id,$list_of_posts[$post_type] ) && !is_home())
 		{
 			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-my', get_option('siteurl').'/wp-content/plugins/simple-alert-plugin/js/jquery.js');
