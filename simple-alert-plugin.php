@@ -65,9 +65,9 @@ class SimpleAlertPlugin {
 		if (!empty($selected_post) && !empty($list_of_posts) && !is_admin() && in_array($post_type,$selected_post) && in_array($post_id,$list_of_posts[$post_type] ) && !is_home())
 		{
 			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-my', get_option('siteurl').'/wp-content/plugins/simple-alert-plugin/js/jquery.js');
-			wp_enqueue_style( 'jquery.fancybox', get_option('siteurl').'/wp-content/plugins/simple-alert-plugin/css/jquery.fancybox.css');
-			wp_enqueue_script('jquery.fancybox', get_option('siteurl').'/wp-content/plugins/simple-alert-plugin/js/jquery.fancybox.js');
+			wp_enqueue_script('jquery-my', plugin_basename( __FILE__ ).'/js/jquery.js');
+			wp_enqueue_style( 'jquery.fancybox', plugin_basename( __FILE__ ).'/css/jquery.fancybox.css');
+			wp_enqueue_script('jquery.fancybox', plugin_basename( __FILE__ ).'/js/jquery.fancybox.js');
 			
 		}
 	}
