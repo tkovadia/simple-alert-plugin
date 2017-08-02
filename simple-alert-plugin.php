@@ -15,12 +15,10 @@ class SimpleAlertPlugin {
     public function __construct() {
  
         add_action( 'admin_menu', array( $this,'simple_alert_plugin_create_menu' ) );
-		add_action( 'admin_init', array( $this,'register_simple_alert_plugin_settings' ) );
-		
-		add_action( 'wp_footer', array( $this, 'simple_alert_code_footer' ) );
-			
-        add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts_styles' ) ); 	
-		   
+		add_action( 'admin_init', array( $this,'register_simple_alert_plugin_settings' ) );		
+		add_action( 'wp_footer', array( $this, 'simple_alert_code_footer' ) );			
+        add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts_styles' ) );
+		//add_action( 'admin_enqueue_scripts', array( $this, 'load_custom_wp_admin_style' )); 
  
     }
 	//Create menu under settings menu
