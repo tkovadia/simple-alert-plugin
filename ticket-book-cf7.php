@@ -11,10 +11,34 @@ Text Domain:
 
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
-// check for plugin using plugin name
-if (! is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) 
-return;
 
+add_action( 'admin_init', 'child_plugin_has_parent_plugin' );
+function child_plugin_has_parent_plugin() {
+    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
+        add_action( 'admin_notices', 'child_plugin_notice' );
+
+        deactivate_plugins( plugin_basename( __FILE__ ) ); 
+
+        if ( isset( $_GET['activate'] ) ) {
+            unset( $_GET['activate'] );
+        }
+    }
+}
+
+function child_plugin_notice(){
+    ?><div class="error"><p>Sorry, but Child Plugin requires the Parent plugin to be installed and active.</p></div><?php
+}
+/*
+register_activation_hook( __FILE__, 'child_plugin_activate' );
+function child_plugin_activate(){
+
+    // Require parent plugin
+    if ( ! is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) and current_user_can( 'activate_plugins' ) ) {
+        // Stop activation redirect and show error
+        wp_die('Sorry, but this plugin requires the Parent Plugin to be installed and active. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
+    }
+}
+/*
 register_activation_hook( __FILE__, 'my_plugin_create_db' );
 
 function my_plugin_create_db() {
